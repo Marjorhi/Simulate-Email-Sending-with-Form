@@ -1,5 +1,8 @@
 // Variables
-const sendBtn = document.getElementById('sendBtn');
+const sendBtn = document.getElementById('sendBtn'),
+email = document.getElementById('email'),
+subject = document.getElementById('subject'),
+message = document.getElementById('message');
 
 
 
@@ -10,6 +13,11 @@ eventListeners();
 function eventListeners () {
     // App Init
     document.addEventListener('DOMContentLoaded', appInit);
+
+    // Validate the Form
+    email.addEventListener('blur', validateField);
+    subject.addEventListener('blur', validateField);
+    message.addEventListener('blur', validateField);
 }
 
 
@@ -19,4 +27,22 @@ function eventListeners () {
 function appInit () {
     // Disable  the send button on load
     sendBtn.disabled = true;
+}
+
+//Validate the Fields
+function validateField() {
+    let errors;
+
+    // Validate the length of the Field
+    validateLength(this)
+}
+//Validate the Length of the Fields
+function validateLength(field) {
+    if(field.value.length > 0) {
+        field.style.borderBottomColor = 'green';
+        field.classList.remove('error');
+    } else {
+        field.style.borderBottomColor = 'red';
+        field.classList.add('error');
+    }
 }
